@@ -10,20 +10,34 @@ namespace BTSSeverity
 {
     public class Threats
     {
-        public void StartThearts(DefenceStrategies tree)
+        public async Task StartThearts(DefenceStrategies tree)
         {
             string filePath = "C:/Users/Dell-pc/source/repos/BTSSeverity/BTSSeverity/Threats.json";
-            string json = File.ReadAllText(filePath);
-            List<ThreatsModel> threats = JsonConvert.DeserializeObject<List<ThreatsModel>>(json);
-            foreach (var threat in threats)
+
+            try
             {
-                int severity = CalculateSeverity(threat);
-                var def = tree.Find(severity);
+                string json = await File.ReadAllTextAsync(filePath);
+                List<ThreatsModel> threats = JsonConvert.DeserializeObject<List<ThreatsModel>>(json);
 
-                Console.WriteLine($"the threat is: {threat.ThreatType}, the defenses is {def.Defenses}");
+                foreach (var threat in threats)
+                {
+                    Console.WriteLine($"the threat {threat.ThreatType} sent");
+                    await Task.Delay(2000);
+                    int severity = CalculateSeverity(threat);
+                    var def = tree.Find(severity);
+                    if (def == null)
+                    {
+                        DefenceNotFound(tree,severity);
+                        continue;
+                    }
+                    Console.WriteLine($"The threat is: {threat.ThreatType}, the defenses are {def.Defenses}");
+
+                }
             }
-
-
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
         }
         public int CalculateSeverity(ThreatsModel threat)
         {
@@ -47,6 +61,21 @@ namespace BTSSeverity
                 return Targets[value];
             }
             return 5;
+        }
+        public void DefenceNotFound(DefenceStrategies tree,int severity)
+        {
+            int? minDefence = tree.GetMin();
+            if (minDefence != null)
+            {
+                if (minDefence > severity)
+                {
+                    Console.WriteLine("is severity Attack below the threshold. Attack is ignored");
+                    return;
+                }
+                
+            }
+            Console.WriteLine("was defence suitable No !found. Brace for impact");
+
         }
 
     }

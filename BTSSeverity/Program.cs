@@ -2,14 +2,20 @@
 using BTSSeverity.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+
 class Program
 {
-    static void Main()
+    static async Task Main()
     {
-
         string filePath = "C:/Users/Dell-pc/source/repos/BTSSeverity/BTSSeverity/defenceStrategiesBalanced.json";
-        string json = File.ReadAllText(filePath);
+
+        // קריאה אסינכרונית של הקובץ
+        string json = await File.ReadAllTextAsync(filePath);
         List<DefenceModel> defenses = JsonConvert.DeserializeObject<List<DefenceModel>>(json);
+
         DefenceStrategies strategy = new DefenceStrategies();
         foreach (var item in defenses)
         {
@@ -17,8 +23,9 @@ class Program
             strategy.Insert(node);
         }
         strategy.PrintTree();
-        Threats threats = new Threats();
-        threats.StartThearts(strategy);
 
+        Threats threats = new Threats();
+        // קריאה לשיטה אסינכרונית
+        await threats.StartThearts(strategy);
     }
 }

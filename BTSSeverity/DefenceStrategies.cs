@@ -76,21 +76,21 @@ namespace BTSSeverity
                 return FindRecursiv(root.Left, value);
             }
         }
-        //public int? GetMin()
-        //{
-        //    return GetMinRecursiv(_root);
-        //}
-        //private int? GetMinRecursiv(Node node)
-        //{
-        //    if (node == null)
-        //    { return null; }
-        //    if (node.Left == null)
-        //    {
-        //        return node.Value;
-        //    }
-        //    return GetMinRecursiv(node.Left);
+        public int? GetMin()
+        {
+            return GetMinRecursiv(_root);
+        }
+        private int? GetMinRecursiv(Node node)
+        {
+            if (node == null)
+            { return null; }
+            if (node.Left == null)
+            {
+                return node.MinSeverity;
+            }
+            return GetMinRecursiv(node.Left);
 
-        //}
+        }
         //public int? GetMax()
         //{
         //    return MaxRecursiv(_root);
