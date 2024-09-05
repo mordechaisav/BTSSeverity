@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BTSSeverity.Models
+    //מודל שיסייע לשלוף ערכים של התקפות מתוך קובץ
 {public class ThreatsModel
     {
         public string ThreatType { get; set; }

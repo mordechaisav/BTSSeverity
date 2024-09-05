@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BTSSeverity.Models
 {
+    //מודל שיסיע בקריאת ערכים של הגנות מתוך קובץ json
     public class DefenceModel
     {
         public int MinSeverity { get; set; }

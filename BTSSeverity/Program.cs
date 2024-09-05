@@ -10,22 +10,28 @@ class Program
 {
     static async Task Main()
     {
-        string filePath = "C:/Users/Dell-pc/source/repos/BTSSeverity/BTSSeverity/defenceStrategiesBalanced.json";
+        //שאיבת כל ההגנות מתוך קובץ והכנסה לרשימה
+        Defenses defense = new Defenses();
+        List<DefenceModel> defences = defense.StartDefenses();
 
-        // קריאה אסינכרונית של הקובץ
-        string json = await File.ReadAllTextAsync(filePath);
-        List<DefenceModel> defenses = JsonConvert.DeserializeObject<List<DefenceModel>>(json);
+        //השהייה בין פעולה לפעולה
+        Console.WriteLine("insert defenses to tree");
+        await Task.Delay(4000);
 
-        DefenceStrategies strategy = new DefenceStrategies();
-        foreach (var item in defenses)
-        {
-            Node node = new Node(item.MinSeverity, item.MaxSeverity, item.Defenses);
-            strategy.Insert(node);
-        }
-        strategy.PrintTree();
+        //הכנסת כל ההגנות לעץ חיפוש בינארי
+        DefenceStrategies tree = defense.InsertToTree(defences);
 
+
+        Console.WriteLine("print the tree");
+        await Task.Delay(4000);
+
+        //הדפסת העץ
+        tree.PrintTree();
+        Console.WriteLine("the threats sent");
+        await Task.Delay(4000);
+
+        //שאיבה של כל ההתקפות והדפסת הגנה מתאימה
         Threats threats = new Threats();
-        // קריאה לשיטה אסינכרונית
-        await threats.StartThearts(strategy);
+        await threats.StartThearts(tree);
     }
 }

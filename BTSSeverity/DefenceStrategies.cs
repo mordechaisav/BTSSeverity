@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BTSSeverity
 {
+    //יצירת מחלקה שמממשת את הפעולות של עץ בינארי
     public class DefenceStrategies
     {
         private Node _root;
@@ -13,12 +14,18 @@ namespace BTSSeverity
         {
             _root = null;
         }
+
+        //הכנסה לתוך העץ
+        //o(log(n))
         public void Insert(Node newNode)
         {
             _root = InsertRecursiv(_root, newNode);
 
 
         }
+
+        //פונקצייה רקורסיבית שמסייעת להכניס ערכים לעץ
+        //o(log(n))
         private Node InsertRecursiv(Node root, Node newNode)
         {
             if (root == null)
@@ -37,11 +44,15 @@ namespace BTSSeverity
             }
             return root;
         }
+        //פונקציה שמדפיסה את כל העץ לפי המבנה של העץ
+        //O(n)
         public void PrintTree()
         {
             PrintTreeRec(_root, 0);
         }
 
+        //פונקצייה רקורסיבית שמסייעת להדפסה
+        //O(n)
         private void PrintTreeRec(Node node, int level)
         {
             if (node == null)
@@ -53,10 +64,14 @@ namespace BTSSeverity
             PrintTreeRec(node.Right, level + 1);
         }
 
+        //פונקציה שמקבלת מספר ובודקת אם נמצא בטווח של אחת ההגנות
+        //o(log(n))
         public Node Find(int value)
         {
             return FindRecursiv(_root, value);
         }
+        //פונקציה רקורסיבית שעוזרת למצוא הגנה במערך
+        //o(log(n))
         private Node FindRecursiv(Node root, int value)
         {
             if (root == null)
@@ -76,10 +91,16 @@ namespace BTSSeverity
                 return FindRecursiv(root.Left, value);
             }
         }
+
+        //פונקציה שמוצאת את ההגנה עם הטווח המינימלי הנמוך ביותר
+        //o(log(n))
         public int? GetMin()
         {
             return GetMinRecursiv(_root);
         }
+
+        //פונקציה שעוזרת למצוא את הטווח המינימלי
+        //o(log(n))
         private int? GetMinRecursiv(Node node)
         {
             if (node == null)
@@ -91,20 +112,6 @@ namespace BTSSeverity
             return GetMinRecursiv(node.Left);
 
         }
-        //public int? GetMax()
-        //{
-        //    return MaxRecursiv(_root);
-        //}
-        //private int? MaxRecursiv(Node node)
-        //{
-        //    if (node == null) { return null; }
-        //    if (node.Right == null)
-        //    {
-        //        return node.Value;
-        //    }
-        //    return MaxRecursiv(node.Right);
-        //}
-
     }
 
 }

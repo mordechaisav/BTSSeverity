@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BTSSeverity
 {
+    //יצירת מודל שיסיע בקליטת ערכים של עץ בינארי
     public class Node
     {
         public Node Left { get; set; }
