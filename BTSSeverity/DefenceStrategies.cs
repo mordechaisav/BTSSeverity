@@ -46,22 +46,35 @@ namespace BTSSeverity
         }
         //פונקציה שמדפיסה את כל העץ לפי המבנה של העץ
         //O(n)
+        // O(n)
         public void PrintTree()
         {
-            PrintTreeRec(_root, 0);
+            PrintTreeRecursiv(_root, "", true);
         }
 
         //פונקצייה רקורסיבית שמסייעת להדפסה
         //O(n)
-        private void PrintTreeRec(Node node, int level)
+        private void PrintTreeRecursiv(Node node, string indent, bool last)
         {
-            if (node == null)
-                return;
-
-            Console.WriteLine(new string(' ', level * 2) + $"Severity {node.MinSeverity}-{node.MaxSeverity}: {string.Join(", ", node.Defenses)}");
-
-            PrintTreeRec(node.Left, level + 1);
-            PrintTreeRec(node.Right, level + 1);
+            if (node != null)
+            {
+                Console.Write(indent);
+                if (last)
+                {
+                    Console.Write("└──Right");
+                    indent += "   ";
+                }
+                else
+                {
+                    Console.Write("├──Left");
+                    indent += "│  ";
+                }
+                Console.WriteLine(
+                    $" Child: [{node.MinSeverity}-{node.MaxSeverity}] Defenses: {string.Join(", ", node.Defenses)}"
+                );
+                PrintTreeRecursiv(node.Left, indent, false);
+                PrintTreeRecursiv(node.Right, indent, true);
+            }
         }
 
         //פונקציה שמקבלת מספר ובודקת אם נמצא בטווח של אחת ההגנות

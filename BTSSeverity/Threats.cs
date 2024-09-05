@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BTSSeverity
 {
@@ -42,7 +43,7 @@ namespace BTSSeverity
                         continue;
                     }
                     //הדפסת הסוג של ההתקפה ואת ההגנות המתאימות
-                    Console.WriteLine($"The threat is: {threat.ThreatType}, the defenses are {def.Defenses}");
+                    Console.WriteLine($"The threat is: {threat.ThreatType}, the defenses are {string.Join(", ", def.Defenses)}");
 
                 }
             }
