@@ -11,7 +11,5 @@ namespace BTSSeverity.Models
         public int MinSeverity { get; set; }
         public int MaxSeverity { get; set; }
         public List<string> Defenses { get; set; }
-        public DefenceModel Left {  get; set; }
-        public DefenceModel Right { get; set; }
     }
 }
