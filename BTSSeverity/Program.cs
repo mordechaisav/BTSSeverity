@@ -17,6 +17,8 @@ class Program
             strategy.Insert(node);
         }
         strategy.PrintTree();
+        Threats threats = new Threats();
+        threats.StartThearts(strategy);
 
     }
 }

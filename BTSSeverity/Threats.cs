@@ -18,7 +18,9 @@ namespace BTSSeverity
             foreach (var threat in threats)
             {
                 int severity = CalculateSeverity(threat);
-                Node def = tree.Find(severity);
+                var def = tree.Find(severity);
+
+                Console.WriteLine($"the threat is: {threat.ThreatType}, the defenses is {def.Defenses}");
             }
 
 
