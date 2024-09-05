@@ -15,7 +15,7 @@ namespace BTSSeverity
         ////O(n)
         public List<DefenceModel> StartDefenses()
         {
-            string filePath = "C:/Users/Dell-pc/source/repos/BTSSeverity/BTSSeverity/defenceStrategiesBalanced.json";
+            string filePath = "C:/Users/Dell-pc/source/repos/BTSSeverity/BTSSeverity/defenceStrategies.json";
 
 
             string json = File.ReadAllText(filePath);

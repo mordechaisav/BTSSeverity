@@ -27,9 +27,15 @@ class Program
 
         //הדפסת העץ
         tree.PrintTree();
+
+        //מיון העץ
+        tree.Balance();
+
+        //הדפסת העץ הממוין
+        tree.PrintTree();
+
         Console.WriteLine("the threats sent");
         await Task.Delay(4000);
-
         //שאיבה של כל ההתקפות והדפסת הגנה מתאימה
         Threats threats = new Threats();
         await threats.StartThearts(tree);

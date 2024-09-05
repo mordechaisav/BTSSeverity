@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BTSSeverity.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -124,6 +125,50 @@ namespace BTSSeverity
             }
             return GetMinRecursiv(node.Left);
 
+        }
+
+
+        public void Balance()
+        {
+            var nodes = new List<DefenceModel>();
+            StoreInOrder(_root, nodes);
+            _root = BalanceRec(nodes, 0, nodes.Count - 1);
+        }
+
+        private void StoreInOrder(Node node, List<DefenceModel> nodes)
+        {
+            if (node == null)
+                return;
+
+            StoreInOrder(node.Left, nodes);
+            DefenceModel model = new DefenceModel
+            {
+                MaxSeverity = node.MaxSeverity,
+                MinSeverity = node.MinSeverity,
+                Defenses = node.Defenses,
+            };
+            nodes.Add(model);
+            StoreInOrder(node.Right, nodes);
+        }
+
+        private Node BalanceRec(List<DefenceModel> nodes, int start, int end)
+        {
+            if (start > end)
+                return null;
+
+            int mid = (start + end) / 2;
+            Node node = new Node
+            {
+                MaxSeverity = nodes[mid].MaxSeverity,
+                MinSeverity = nodes[mid].MinSeverity,
+                Defenses = nodes[mid].Defenses,
+
+            };
+
+            node.Left = BalanceRec(nodes, start, mid - 1);
+            node.Right = BalanceRec(nodes, mid + 1, end);
+
+            return node;
         }
     }
 
