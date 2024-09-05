@@ -10,14 +10,41 @@ namespace BTSSeverity
 {
     public class Threats
     {
-        public void StartThearts()
+        public void StartThearts(DefenceStrategies tree)
         {
             string filePath = "C:/Users/Dell-pc/source/repos/BTSSeverity/BTSSeverity/Threats.json";
             string json = File.ReadAllText(filePath);
-            List<ThreatsModel> defenses = JsonConvert.DeserializeObject<List<ThreatsModel>>(json);
+            List<ThreatsModel> threats = JsonConvert.DeserializeObject<List<ThreatsModel>>(json);
+            foreach (var threat in threats)
+            {
+                int severity = CalculateSeverity(threat);
+                Node def = tree.Find(severity);
+            }
 
 
+        }
+        public int CalculateSeverity(ThreatsModel threat)
+        {
+            int targetValue = CalculatTarget(threat.Target);
+            int severity = (threat.Volume * threat.Sophistication) + targetValue;
+            return severity;
+        }
+        public static int CalculatTarget(string value)
+        {
+            
+            Dictionary<string, int> Targets = new Dictionary<string, int>()
+            {
+                { "Web Server", 10 },
+                { "Database", 15 },
+                { "User Credentials", 20 }
 
+            };
+            
+            if (Targets.ContainsKey(value))
+            {
+                return Targets[value];
+            }
+            return 5;
         }
 
     }

@@ -53,19 +53,19 @@ namespace BTSSeverity
             PrintTreeRec(node.Right, level + 1);
         }
 
-        public bool Find(int value)
+        public Node Find(int value)
         {
             return FindRecursiv(_root, value);
         }
-        private bool FindRecursiv(Node root, int value)
+        private Node FindRecursiv(Node root, int value)
         {
             if (root == null)
             {
-                return false;
+                return root;
             }
             if (root.MinSeverity <= value && root.MaxSeverity >= value)
             {
-                return true;
+                return root;
             }
             if (root.MaxSeverity < value)
             {

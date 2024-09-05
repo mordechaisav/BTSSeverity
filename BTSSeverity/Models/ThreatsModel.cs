@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BTSSeverity.Models
-{
-    internal class ThreatsModel
+{public class ThreatsModel
     {
         public string ThreatType { get; set; }
         public int Volume { get; set; }
